@@ -20,6 +20,7 @@ module.exports = function container(conf, so, inOptions) {
   function publicClient() {
     if (!public_client)
       public_client = new ccxt[exchagneId]({ apiKey: "", secret: "", options });
+      // public_client = new ccxt.binanceusdm({ apiKey: "", secret: "", options });
     setProxy(public_client);
     return public_client;
   }
@@ -50,6 +51,13 @@ module.exports = function container(conf, so, inOptions) {
         options,
         enableRateLimit: true,
       });
+
+      // authed_client = new ccxt[exchagneId]({
+      //   apiKey: "YYZMuqXaaigHBrGXhlhuIpWuTV8tT8AnGJHWhdeK0Jls2Yw6GZ0tO94wb8Vfu8Qv",
+      //   secret: "dC1cFLAXOVGsevJg3owqlveKBVoIufYVvkbbe1lAJbiFB4MkDKCHChfEh3iDmVwr",
+      //   options,
+      //   enableRateLimit: true,
+      // });
       setProxy(authed_client);
     }
     return authed_client;
@@ -79,7 +87,8 @@ module.exports = function container(conf, so, inOptions) {
     if (
       method !== "getTrades" &&
       method !== "getKLines" &&
-      method !== "getTickers"
+      method !== "getTickers" &&
+      method !== "getDepth"
     ) {
       console.error(
         (
@@ -405,6 +414,7 @@ module.exports = function container(conf, so, inOptions) {
       }
     },
     getTickers: function (opts, cb) {
+      console.log("run getTicker in ccxt");
       var func_args = [].slice.call(arguments);
       var client = publicClient();
       var symbols =
@@ -490,13 +500,15 @@ module.exports = function container(conf, so, inOptions) {
         });
     },
     getDepth: function (opts, cb) {
+      console.log("running getDepth");
       var func_args = [].slice.call(arguments);
       var client = publicClient();
       client
-        .fetchOrderBook(joinProduct(opts.product_id), { limit: opts.limit })
+        // .fetchOrderBook(joinProduct(opts.product_id), { limit: opts.limit })
+        .fetchOrderBook("BTC/USDT",   100 )
         .then((result) => {
-          // console.log('getDepth result...', opts, result)
-          cb(null, result);
+          console.log('getDepth result...', opts, result);
+          // cb(null, result);
         })
         .catch(function (error) {
           console.error("An error ocurred", error);

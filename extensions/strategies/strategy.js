@@ -24,7 +24,7 @@ module.exports = function (so) {
             [st.name + "_buyCrossCount"]: 0,
             [st.name + "_sellCrossCount"]: 0,
           };
-        //  console.time('cal2')
+        //  console.log(symbol);
         if (!st.inputParams) {
           st.inputParams = {};
           st.input.forEach((input) => {

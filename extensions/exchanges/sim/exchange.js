@@ -86,6 +86,8 @@ module.exports = function sim(conf, so, s) {
       }, latency);
     },
     getQuote: function (opts, cb) {
+      // console.log("getQuote sim");
+      // console.log(s.symbols);
       if (so.mode === "paper" && !so.sim_price) {
         return real_exchange.getQuote(opts, cb);
       } else {

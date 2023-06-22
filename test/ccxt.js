@@ -6,9 +6,10 @@ const test = async () => {
     // let exchanges = ['binanceusdm']
     // let exchanges = ccxt.exchanges
 
-    const exchange = new ccxt.binanceusdm()
-    const trades = await exchange.fetchTrades('BTC/USDT', undefined, 100)
-    console.log(trades)
+    const exchange = new ccxt.binance()
+    // const trades = await exchange.fetchTrades('BTC/USDT', undefined, 100)
+    const depth = await exchange.fetchOrderBook('BTC/USDT', undefined, 100)
+    console.log(depth)
     /* const markKlines = await exchange.fetchOHLCV('ADA/USDT', '1h', undefined, 2, { 'price': 'mark' })
     console.log(markKlines)
     const indexKlines = await exchange.fetchOHLCV('ADA/USDT', '1h', undefined, 2, { 'price': 'index' })

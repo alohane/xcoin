@@ -16,7 +16,7 @@ const output = {
 const server = {
   ip: "127.0.0.1",
   port: 17988,
-  save_pairs: "binanceusdm.BTC-USDT,binanceusdm.DOGE-USDT",
+  save_pairs: "binanceusdm.BTC-USDT",
   db: "tickers",
 };
 const options = {

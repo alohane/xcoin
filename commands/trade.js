@@ -355,37 +355,6 @@ module.exports = function (program, conf) {
               );
             })
             .map((t) => {
-              /*  klineScanCount++
-             console.log('\nklineScanCount', klineScanCount)
-             if (klineScanCount > 50) {
-               realTickers[t].close = realTickers[t].close * (100 + (120 - klineScanCount) / 10) / 100
-             } else if (klineScanCount > 20) {
-               if (klineScanCount > 36) {
-                 realTickers[t].close = realTickers[t].close * (100 + (4 + klineScanCount - 40) / 10) / 100
-               }
-               else {
-                 realTickers[t].close = realTickers[t].close * (100 + (40 - klineScanCount) / 10) / 100
-               }
-             }
-             else {
-               realTickers[t].close = realTickers[t].close * (100 + klineScanCount / 10) / 100
-             }
-             */
-
-              //for short
-              /* if (klineScanCount > 60) {
-              realTickers[t].close = realTickers[t].close * (100 + (klineScanCount - 120) / 10) / 100
-            } else if (klineScanCount > 24) {
-              if (klineScanCount > 50) {
-                realTickers[t].close = realTickers[t].close * (100 - (klineScanCount - 50) / 10) / 100
-              }
-              else {
-                realTickers[t].close = realTickers[t].close * (100 + (klineScanCount - 48) / 10) / 100
-              }
-            }
-            else {
-              realTickers[t].close = realTickers[t].close * (100 - klineScanCount / 10) / 100
-            } */
               let id = crypto.randomBytes(4).toString("hex");
               return {
                 id,
@@ -403,6 +372,14 @@ module.exports = function (program, conf) {
             });
           checkTrade(inTrades);
         });
+        s.exchange.getDepth(opts, function (err, depth) {
+          console.log('realTickers', depth)
+          if (err || !depth) return;
+          // console.log('forward scan', realTickers)
+          
+        });
+
+
       }
       /**
        * check trade
